@@ -1,0 +1,110 @@
+﻿@{
+    ViewData["Title"] = "Home";
+    Layout = "~/Views/Shared/NavBar.cshtml";
+}
+
+<!-- Full-screen hero section -->
+<div class="hero-container">
+    <div class="hero-content text-center">
+        <!-- Main Warehouse Icon -->
+        <i class="bi bi-warehouse-fill hero-icon"></i>
+
+        <!-- Welcome Title -->
+        <h1 class="hero-title">Welcome to Your Warehouse</h1>
+
+        <!-- Subtitle -->
+        <p class="hero-subtitle">
+            Track stock, manage inventory, and optimize your warehouse operations with ease. 📦🚚
+        </p>
+
+        <!-- Decorative Icon Row -->
+        <div class="icon-row">
+            <i class="bi bi-box-seam-fill"></i>
+            <i class="bi bi-truck"></i>
+            <i class="bi bi-cart4"></i>
+        </div>
+
+        <!-- Floating Boxes -->
+        <div class="floating-boxes">
+            <i class="bi bi-box floating-box box1"></i>
+            <i class="bi bi-box floating-box box2"></i>
+            <i class="bi bi-box floating-box box3"></i>
+        </div>
+    </div>
+</div>
+
+<!-- Styles -->
+<style>
+    /* Hero container */
+    .hero-container {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #fef3c7 0%, #dbeafe 100%);
+    }
+
+    /* Hero content */
+    .hero-title {
+        font-size: 60px;
+        font-weight: 800;
+        color: #14b8a6;
+        margin-top: 20px;
+    }
+
+    .hero-subtitle {
+        font-size: 22px;
+        color: #374151;
+        margin-top: 15px;
+    }
+
+    .hero-icon {
+        font-size: 120px;
+        color: #f59e0b;
+    }
+
+    /* Decorative icons */
+    .icon-row {
+        margin-top: 40px;
+        display: flex;
+        justify-content: center;
+        gap: 50px;
+        font-size: 50px;
+        color: #6b7280;
+    }
+
+    /* Floating boxes */
+    .floating-boxes {
+        position: relative;
+        height: 100px;
+        margin-top: 50px;
+    }
+
+   
+
+    .floating-box {
+        font-size: 50px;
+        position: absolute;
+        animation: moveBox 3s infinite alternate;
+    }
+
+    .box1 {
+        left: 0;
+        color: #22c55e;
+    }
+
+    .box2 {
+        left: 60px;
+        color: #3b82f6;
+        animation-duration: 4s;
+    }
+
+    .box3 {
+        left: 120px;
+        color: #f87171;
+        animation-duration: 3.5s;
+    }
+</style>
+
+<!-- Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">

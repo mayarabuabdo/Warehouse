@@ -1,0 +1,174 @@
+﻿@using Warehouse.Models
+@model WarehouseVM
+@{
+    ViewData["Title"] = "AddWarehouse";
+    Layout = "~/Views/Shared/NavBar.cshtml";
+}
+
+<style>
+    :root {
+        --brand: #14b8a6; /* Teal */
+        --accent: #f59e0b; /* Gold */
+        --ink: #1f2937; /* Dark text */
+        --muted: #6b7280;
+        --bg: #f6f3ee; /* Page background */
+        --card: #ffffff;
+        --shadow: rgba(0,0,0,0.15);
+    }
+
+    body {
+        background: var(--bg);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .form-wrapper {
+        display: flex;
+        justify-content: center;
+        padding: 3rem 2rem;
+    }
+
+    .form-card {
+        background: var(--card);
+        border-radius: 15px;
+        box-shadow: 0 25px 60px var(--shadow);
+        padding: 2rem 3rem;
+        width: 100%;
+        max-width: 650px;
+        border: 2px solid var(--brand);
+    }
+
+    .warehouse-icon {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--accent), var(--brand));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        color: #fff;
+        margin: 0 auto 1rem auto;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .form-card h2 {
+        text-align: center;
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--ink);
+        margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+        color: var(--ink);
+        font-weight: 600;
+    }
+
+    .form-control, .form-select {
+        border-color: #e5e7eb;
+        border-radius: 12px;
+        padding: 0.8rem 1.2rem;
+        font-size: 1rem;
+        transition: all 0.2s ease-in-out;
+    }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--brand);
+            box-shadow: 0 0 0 .25rem rgba(20,184,166,.15);
+        }
+
+    .btn-add {
+        width: 100%;
+        padding: 0.8rem;
+        font-weight: 600;
+        font-size: 1.1rem;
+        background: linear-gradient(90deg, var(--accent), var(--brand));
+        border: none;
+        border-radius: 12px;
+        color: var(--ink);
+        box-shadow: 0 10px 25px rgba(20,184,166,.2);
+        transition: all 0.25s ease-in-out;
+        margin-top: 2rem;
+    }
+
+        .btn-add:hover {
+            filter: brightness(1.05);
+            transform: translateY(-2px);
+        }
+</style>
+
+<div class="form-wrapper">
+    <div class="form-card">
+        <!-- Warehouse Icon -->
+        <div class="warehouse-icon">
+            <i class="fa-solid fa-warehouse"></i>
+        </div>
+
+        <h2>Add New Warehouse</h2>
+
+        <!-- First Form: Select Country -->
+        
+        <form method="post" asp-action="@( (bool)ViewData["AddWarehouse"]  ? "AddWarehouseWithCityOptions" : "EditWarehouseWithCityOptions" )" asp-controller="Warehouse">
+            <div class="mb-3">
+                <label class="form-label" for="Name">Warehouse Name</label>
+                <input class="form-control" name="Name" value="@Model.warehouse.Name" placeholder="Enter warehouse name" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="Description">Description</label>
+                <input class="form-control" name="Description" value="@Model.warehouse.Description" placeholder="Short description" />
+            </div>
+            <input type="hidden" name="Id" value="@Model.warehouse.Id" />
+            <div class="mb-3">
+                <label class="form-label" for="CountryId">Country</label>
+                <select class="form-select" name="CountryId" required onchange="this.form.submit()">
+                    <option value="">Select Country</option>
+                    @foreach (var country in Model.countries)
+                    {
+                        <option value="@country.Id" selected="@( (int)ViewData["SelectedCountry"] == country.Id )">
+                            @country.Name
+                        </option>
+                    }
+                </select>
+            </div>
+        </form>
+
+        <!-- Second Form: Select City -->
+        <form method="post" >
+            <input type="hidden" name="Name" value="@Model.warehouse.Name" />
+            <input type="hidden" name="Description" value="@Model.warehouse.Description" />
+            <input type="hidden" name="CountryId" value="@Model.warehouse.CountryId" />
+            <input type="hidden" name="Id" value="@Model.warehouse.Id" />
+            <div class="mb-3">
+                <label class="form-label" for="CityId">City</label>
+                <select class="form-select" name="CityId" required>
+                    <option value="">Select City</option>
+                    @foreach (var city in Model.cities)
+                    {
+                        <option value="@city.Id" selected="@(Model.warehouse.CityId == city.Id)">
+                            @city.Name
+                        </option>
+                    }
+                </select>
+            </div>
+            @if ((bool)ViewData["AddWarehouse"])
+            {
+                <button type="submit" class="btn-add" asp-action="AddWarehouse" asp-controller="Warehouse">
+                    <i class="fa-solid fa-plus me-2"></i> Add Warehouse
+                </button>
+            }
+
+            else
+            {
+
+                <button type="submit" class="btn-add" asp-action="EditWarehouse" asp-controller="Warehouse">
+                    <i class="fa-solid fa-pen"></i> Update Warehouse
+                </button>
+            }
+
+
+        </form>
+    </div>
+</div>

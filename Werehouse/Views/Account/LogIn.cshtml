@@ -1,0 +1,188 @@
+﻿@using Warehouse.Models
+@model UserLogin
+@{
+    ViewData["Title"] = "Login";
+    Layout = null;
+}
+
+<style>
+    :root {
+        --brand: #14b8a6; /* Light teal */
+        --brand-600: #0d9488;
+        --accent: #fbbf24; /* Soft gold */
+        --ink: #374151; /* Slate gray */
+        --muted: #6b7280;
+        --bg: #fafafa;
+    }
+
+    body {
+        background: linear-gradient(180deg, #ffffff, #f9fafb 60%, #fef9f3 100%);
+    }
+
+    .login-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: calc(100vh - 64px);
+        padding: 1rem;
+    }
+
+    .login-card {
+        background: #fff;
+        border-radius: 20px;
+        border: 1px solid #f3f4f6;
+        box-shadow: 0 12px 40px rgba(0,0,0,.12);
+        padding: 3rem 3.5rem; /* larger padding */
+        max-width: 450px; /* wider card */
+        width: 100%;
+    }
+
+        .login-card h3 {
+            color: var(--ink);
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 2rem; /* more space below heading */
+            font-size: 1.8rem; /* bigger heading */
+        }
+
+    .form-label {
+        color: var(--ink);
+        font-weight: 600;
+    }
+
+    .form-control {
+        border-color: #e5e7eb;
+        border-radius: 12px;
+        height: 45px; /* taller input fields */
+    }
+
+        .form-control:focus {
+            border-color: var(--brand);
+            box-shadow: 0 0 0 .2rem rgba(20,184,166,.15);
+        }
+
+    .btn-brand {
+        background: linear-gradient(90deg, var(--accent), var(--brand));
+        color: #1f2937;
+        border: none;
+        border-radius: 12px;
+        transition: all .25s ease-in-out;
+        font-weight: 600;
+        box-shadow: 0 8px 18px rgba(20,184,166,.25);
+        padding: 0.7rem 0; /* taller button */
+        font-size: 1rem;
+    }
+
+        .btn-brand:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.03);
+            box-shadow: 0 12px 25px rgba(20,184,166,.3);
+        }
+
+    .text-center small {
+        color: var(--muted);
+    }
+
+    .muted-link {
+        color: var(--brand-600);
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+        .muted-link:hover {
+            text-decoration: underline;
+        }
+
+    .input-group-text {
+        background: #f8fafc;
+        border-color: #e5e7eb;
+        border-radius: 12px 0 0 12px;
+        height: 45px; /* match input height */
+        font-size: 1rem;
+    }
+</style>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"] - WareFlow</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+<div class="login-container">
+    <div class="login-card">
+
+        @if ((bool?)ViewData["InvalidInfo"] == true)
+        {
+            <div class="alert alert-danger shadow-sm" role="alert">
+                Invalid username or password. Please try again.
+            </div>
+        }
+
+        <h3>Welcome Back 👋</h3>
+
+        <form method="post" asp-controller="Account" asp-action="Login">
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <!-- Username -->
+            <div class="mb-4">
+                <label asp-for="UserName" class="form-label">Username</label>
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <i class="fa-regular fa-user"></i>
+                    </span>
+                    <input asp-for="UserName" class="form-control" placeholder="name@example.com" required/>
+                </div>
+                <span asp-validation-for="UserName" class="text-danger small"></span>
+            </div>
+
+            <!-- Password -->
+            <div class="mb-5">
+                <label asp-for="Password" class="form-label">Password</label>
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <i class="fa-solid fa-lock"></i>
+                    </span>
+                        <input asp-for="Password" class="form-control" type="password" id="PasswordInput" required />
+                    <button type="button" class="btn btn-outline-secondary" id="TogglePwd" tabindex="-1">
+                        <i class="fa-regular fa-eye"></i>
+                    </button>
+                </div>
+                <span asp-validation-for="Password" class="text-danger small"></span>
+            </div>
+
+            <!-- Submit -->
+            <button class="btn btn-brand w-100 fw-semibold mb-4">
+                <i class="fa-solid fa-right-to-bracket me-2"></i> Login
+            </button>
+
+            <div class="text-center">
+                <small>
+                    Don’t have an account?
+                    <a class="muted-link" asp-controller="User" asp-action="SignUpPage">Create one</a>
+                </small>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        (function () {
+            const toggle = document.getElementById('TogglePwd');
+            const input = document.getElementById('PasswordInput');
+            toggle?.addEventListener('click', function () {
+                const isPwd = input.getAttribute('type') === 'password';
+                input.setAttribute('type', isPwd ? 'text' : 'password');
+                this.innerHTML = isPwd
+                    ? '<i class="fa-regular fa-eye-slash"></i>'
+                    : '<i class="fa-regular fa-eye"></i>';
+            });
+        })();
+    </script>
+}
+</body>
+</html>

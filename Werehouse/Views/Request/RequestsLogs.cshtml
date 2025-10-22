@@ -1,0 +1,206 @@
+﻿@using Warehouse.Models
+@model List<RequestLogModel>
+@{
+    ViewData["Title"] = "Previous Documents";
+    Layout = "~/Views/Shared/NavBar.cshtml";
+}
+
+<style>
+    :root {
+        --brand: #14b8a6; /* Teal */
+        --accent: #f59e0b; /* Gold */
+        --ink: #1f2937;
+        --bg: #f6f3ee;
+        --card: #ffffff;
+        --shadow: rgba(0,0,0,0.1);
+    }
+
+    /* Search Section */
+    .search-bar {
+        margin-top: 3rem; /* vertical space from navbar */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        flex-wrap: wrap; /* responsive for small screens */
+    }
+
+        .search-bar label {
+            font-weight: 600;
+            color: var(--ink);
+        }
+
+        .search-bar input {
+            min-width: 300px;
+            max-width: 500px;
+            flex: 1;
+        }
+
+    .btn-search {
+        background: var(--brand);
+        color: white;
+        font-weight: 600;
+        padding: 0.55rem 1.5rem;
+        border-radius: 8px;
+        border: none;
+        transition: 0.3s;
+    }
+
+        .btn-search:hover {
+            background: var(--accent);
+            color: #fff;
+        }
+
+    /* Table Section */
+    .table-card {
+        background: var(--card);
+        border-radius: 15px;
+        box-shadow: 0 15px 40px var(--shadow);
+        padding: 2rem;
+        margin-top: 2rem;
+        border: 2px solid var(--brand);
+    }
+
+        .table-card h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-align: center;
+            color: var(--ink);
+            margin-bottom: 1.5rem;
+        }
+
+    .custom-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+    }
+
+        .custom-table thead {
+            background: linear-gradient(90deg, var(--accent), var(--brand));
+            color: #fff;
+        }
+
+        .custom-table th, .custom-table td {
+            padding: 0.9rem 1rem;
+            text-align: center;
+            vertical-align: middle;
+            border-bottom: 1px solid #e5e7eb;
+            font-weight: 500;
+        }
+
+        .custom-table th {
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .custom-table tr:last-child td {
+            border-bottom: none;
+        }
+
+    .td-center {
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: 2rem;
+        font-size: 1rem;
+        font-weight: 500;
+        color: #6b7280;
+    }
+
+    .view-btn {
+        background: linear-gradient(90deg, var(--accent), var(--brand));
+        border: none;
+        border-radius: 10px;
+        padding: 0.6rem 1.2rem;
+        color: #fff;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.25s ease-in-out;
+        font-size: 0.95rem;
+    }
+
+        .view-btn:hover {
+            filter: brightness(1.05);
+            transform: translateY(-2px);
+        }
+</style>
+
+<div class="container">
+    <!-- Search Form -->
+    <form method="post" asp-controller="Request" asp-action="RequestSearchById">
+        <div class="search-bar">
+            <label for="RequestId" class="col-form-label">Request Id</label>
+            <input type="number" id="RequestId" class="form-control" placeholder="Enter Request ID" name="requestId">
+            <button type="submit" class="btn-search">Search</button>
+        </div>
+    </form>
+
+    <!-- Table -->
+    <div class="row">
+        <div class="col">
+            <div class="table-card">
+                <h2>Request logs</h2>
+
+                <div class="table-responsive">
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th>RequestId</th>
+                                <th>Step</th>
+                                <th>Status</th>
+                                <th>Action token by</th>
+                                <th>Time</th>
+                                <th>Action</th>
+                                <th>Request Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.Count > 0)
+                            {
+                                @foreach (var requestDoc in Model)
+                                {
+                                    <tr>
+                                        <td>@requestDoc.RequestId</td>
+                                        <td>@requestDoc.StepName</td>
+                                        <td>@requestDoc.StatusName</td>
+                                        <td>@requestDoc.ActionTokenByName</td>
+                                        <td>@requestDoc.ActionTokenAt</td>
+                                        <td class="td-center">
+                                            @requestDoc.ActionName
+                                        </td>
+                                        <td>
+                                            <form>
+                                                <input type="hidden" name="CreatedById" value="@requestDoc.ActionTokenById" />
+                                                <input type="hidden" name="StepId" value="@requestDoc.StepId" />
+                                                <input type="hidden" name="StausId" value="@requestDoc.StatusId" />
+                                                <input type="hidden" name="Id" value="@requestDoc.RequestId" />
+                                           
+                                                <button type="submit" class="view-btn "
+                                                        asp-controller="Request" asp-action="ViewWarehouseRequestDetials">
+                                                    View Details
+                                                </button>
+                                            </form>
+
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="6" class="empty-state">
+                                        No previous documents found.
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+z

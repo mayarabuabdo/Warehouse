@@ -1,0 +1,184 @@
+﻿@using Warehouse.Models
+@model List<RequestModule>
+@{
+    ViewData["Title"] = "EmployeeRequest";
+    Layout = "~/Views/Shared/NavBar.cshtml";
+}
+
+<style>
+    :root {
+        --brand: #14b8a6; /* Teal */
+        --accent: #f59e0b; /* Gold */
+        --ink: #1f2937; /* Dark text */
+        --muted: #6b7280;
+        --bg: #f6f3ee; /* Page background */
+        --card: #ffffff;
+        --shadow: rgba(0,0,0,0.1);
+    }
+
+    body {
+        background: var(--bg);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .table-card {
+        background: var(--card);
+        border-radius: 15px;
+        box-shadow: 0 15px 40px var(--shadow);
+        padding: 2rem;
+        margin-top: 2rem;
+        border: 2px solid var(--brand);
+    }
+
+        .table-card h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-align: center;
+            color: var(--ink);
+            margin-bottom: 1.5rem;
+        }
+
+    .custom-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+    }
+
+        .custom-table thead {
+            background: linear-gradient(90deg, var(--accent), var(--brand));
+            color: #fff;
+        }
+
+        .custom-table th {
+            padding: 1rem;
+            font-size: 1rem;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .custom-table td {
+            padding: 0.9rem;
+            text-align: center;
+            color: var(--ink);
+            vertical-align: middle;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .custom-table tr:last-child td {
+            border-bottom: none;
+        }
+
+    .view-btn {
+        background: linear-gradient(90deg, var(--accent), var(--brand));
+        border: none;
+        border-radius: 10px;
+        padding: 0.6rem 1.2rem;
+        color: #fff;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.25s ease-in-out;
+        font-size: 0.95rem;
+    }
+
+        .view-btn:hover {
+            filter: brightness(1.05);
+            transform: translateY(-2px);
+        }
+
+    .table-responsive {
+        overflow-x: auto;
+    }
+
+    /* Icon button style */
+    .icon-btn {
+        background: transparent;
+        border: none;
+        color: var(--brand);
+        cursor: pointer;
+        font-size: 1.3rem;
+        padding: 0;
+        transition: color 0.2s ease-in-out, transform 0.2s ease-in-out;
+    }
+
+        .icon-btn:hover {
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+    /* Center content in table cell without affecting row height */
+    .td-center {
+        text-align: center; /* horizontal center */
+        vertical-align: middle; /* vertical alignment same as other cells */
+    }
+
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="table-card">
+                <h2> Requests</h2>
+                <div class="table-responsive">
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th>Request Id</th>
+                                <th>Created At</th>
+                                <th>Request Type</th>
+                                <th>In Step</th>
+                                <th>Status</th>
+                                @if ((bool)ViewData["PendingRequest"] == true)
+                                {
+                                    <th>Document</th>
+                                }
+                                <th>Request Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (RequestModule request in Model)
+                            {
+                                <tr>
+                                    <td>@request.Id</td>
+                                    <td>@request.CreatedAt</td>
+                                    <td>@request.RequestTypeName</td>
+                                    <td>@request.StepName</td>
+                                    <td>@request.StatusName</td>
+
+                                    @if ((bool)ViewData["PendingRequest"] == true)
+                                    {
+                                        <td class="td-center">
+                                            <form style="margin:0; padding:0;">
+                                               
+                                                <input type="hidden" name="requestId" value="@request.Id" />
+                                               
+                                                <button type="submit" class="icon-btn" title="View Attachments"
+                                                        asp-controller="Request" asp-action="ViewRequstDocument">
+                                                    <i class="fa-solid fa-paperclip"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    }
+
+                                    <td>
+                                        <form>
+                                            <input type="hidden" name="CreatedById" value="@request.CreatedById" />
+                                            <input type="hidden" name="StepId" value="@request.StepId" />
+                                            <input type="hidden" name="StausId" value="@request.StausId" />
+                                            <input type="hidden" name="Id" value="@request.Id" />
+                                            <input type="hidden" name="RequestTypeId" value="@request.RequestTypeId" />
+                                            <button type="submit" class="view-btn"
+                                                    asp-controller="Request" asp-action="ViewWarehouseRequestDetials">
+                                                View Details
+                                            </button>
+                                        </form>
+                                    </td>
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

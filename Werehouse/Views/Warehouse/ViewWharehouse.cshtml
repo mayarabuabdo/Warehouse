@@ -1,0 +1,258 @@
+﻿@using Warehouse.Models
+@model List<WarehouseModel>
+@{
+    ViewData["Title"] = "View Warehouse";
+    Layout = "~/Views/Shared/NavBar.cshtml";
+}
+
+<style>
+    :root {
+        --brand: #14b8a6; /* Teal */
+        --accent: #f59e0b; /* Gold */
+        --ink: #1f2937; /* Dark text */
+        --muted: #6b7280;
+        --bg: #f6f3ee; /* Page background */
+        --card: #ffffff;
+        --shadow: rgba(0,0,0,0.1);
+    }
+
+    body {
+        background: var(--bg);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .table-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 30px;
+        gap: 1rem;
+    }
+
+    .table-container {
+        width: 95%;
+        max-width: 1200px;
+        background: var(--card);
+        border-radius: 12px;
+        box-shadow: 0 15px 40px var(--shadow);
+        padding: 1.5rem;
+    }
+
+    h2 {
+        text-align: center;
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--ink);
+        margin-bottom: 1rem;
+    }
+
+    .avatar {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--accent), var(--brand));
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin: 0 auto 1rem auto;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 1rem;
+        color: var(--ink);
+        margin-top: 1rem;
+        border: 2px solid var(--brand);
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    thead th {
+        padding: 0.8rem 1rem;
+        border-bottom: 2px solid var(--accent);
+        text-align: center;
+        font-weight: 600;
+        background: var(--card);
+    }
+
+    tbody td {
+        padding: 0.75rem 1rem;
+        text-align: center;
+        border-bottom: 1px solid #e0e0e0;
+        border-right: 1px solid #e0e0e0;
+        font-weight: 500;
+        transition: all 0.15s ease-in-out;
+    }
+
+        tbody td:last-child {
+            border-right: none;
+        }
+
+    tbody tr:last-child td {
+        border-bottom: none;
+    }
+
+    tbody tr:hover {
+        background: rgba(20, 184, 166, 0.05);
+    }
+
+    .btn-action {
+        padding: 0.35rem 0.9rem;
+        font-size: 0.85rem;
+        border-radius: 8px;
+        font-weight: 600;
+        margin: 0 2px;
+        transition: all 0.2s ease;
+        display: inline-block;
+        text-decoration: none;
+        color: #fff;
+        border: none;
+    }
+
+    .btn-edit {
+        background: var(--accent);
+    }
+
+        .btn-edit:hover {
+            background: #fbbf24;
+            transform: translateY(-1px);
+        }
+
+    .btn-delete {
+        background: #ef4444;
+    }
+
+        .btn-delete:hover {
+            background: #f87171;
+            transform: translateY(-1px);
+        }
+
+    .btn-add {
+        padding: 0.45rem 1.2rem;
+        font-size: 0.95rem;
+        border-radius: 8px;
+        font-weight: 600;
+        color: #fff;
+        background: var(--brand);
+        border: none;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        transition: all 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        text-decoration: none;
+    }
+
+        .btn-add:hover {
+            background: #0d9488;
+            transform: translateY(-1px);
+        }
+
+    .add-btn-wrapper {
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+        max-width: 1200px;
+        margin-top: 1rem;
+    }
+
+    .btn-disabled {
+        color: #fff;
+        padding: 0.5rem 1.2rem;
+        border-radius: 8px;
+        font-weight: 600;
+        margin: 0 2px;
+        transition: all 0.2s ease;
+        display: inline-block;
+        text-decoration: none;
+        background-color: #D3D3D3;
+    }
+</style>
+
+<div class="table-wrapper">
+    <div class="table-container">
+        <div class="avatar">
+            <i class="fa-solid fa-warehouse"></i>
+        </div>
+
+        <h2>All Warehouses</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Country</th>
+                    <th>City</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (WarehouseModel warehouse in Model)
+                {
+                    <tr>
+                        <td>@warehouse.Name</td>
+                        <td>@warehouse.Description</td>
+                        <td>@warehouse.CountryName</td>
+                        <td>@warehouse.CityName</td>
+                        <td>
+                            @if((bool) ViewData["IsActive"] == true)
+                            {
+                                <div class="d-flex justify-content-center gap-1">
+                                    <!-- Delete -->
+                                    <form method="post" asp-action="DeactivateWarehouse" asp-controller="Warehouse">
+                                        <button class="btn-action btn-delete" type="submit" name="warehouseId" value="@warehouse.Id">
+                                            DeActivate
+                                        </button>
+                                    </form>
+
+                                    <!-- Edit -->
+                                    <form method="post" asp-action="EditWarehousePage" asp-controller="Warehouse">
+                                        <input type="hidden" name="Id" value="@warehouse.Id" />
+                                        <input type="hidden" name="Name" value="@warehouse.Name" />
+                                        <input type="hidden" name="Description" value="@warehouse.Description" />
+                                        <input type="hidden" name="CountryId" value="@warehouse.CountryId" />
+                                        <input type="hidden" name="CityId" value="@warehouse.CityId" />
+                                        <button class="btn-action btn-edit" type="submit">Edit</button>
+                                    </form>
+                                </div>
+                            }
+
+
+                            else
+                            {
+
+                                <form method="post" asp-action="ActivateWarehouse" asp-controller="Warehouse">
+                                    <button class="btn-action btn-add" type="submit" name="warehouseId" value="@warehouse.Id">
+                                     Activate
+                                    </button>
+                                </form>
+                            }
+                        </td>
+                    </tr>
+                }
+
+                @if ((bool)ViewData["IsActive"] == true)
+                {
+                    <tr>
+                        <div class="add-btn-wrapper">
+                            <a class="btn-add" asp-controller="Warehouse" asp-action="AddWarehousestartPage">
+                                <i class="fa-solid fa-plus"></i> Add Warehouse
+                            </a>
+                        </div>
+                    </tr>
+                }
+
+            </tbody>
+       
+        </table>
+    </div>
+
+  
+  
+</div>

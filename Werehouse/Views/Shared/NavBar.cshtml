@@ -1,0 +1,253 @@
+﻿@using Warehouse.Data
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<AppUser> signInManager
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WareFlow</title>
+
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+
+    <style>
+        :root {
+            --primary: #14b8a6;
+            --secondary: #34d399;
+            --light: #ffffff;
+            --dark: #1f2937;
+            --bg: #f6f3ee;
+            --glass-bg: rgba(255, 255, 255, 0.2);
+            --shadow: rgba(0,0,0,0.15);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(180deg, #e0f7f7, #fef7e6);
+            margin: 0;
+        }
+
+        .navbar-custom {
+            backdrop-filter: blur(15px);
+            background: var(--glass-bg);
+            border-radius: 12px;
+            box-shadow: 0 8px 25px var(--shadow);
+            padding: 0.5rem 1.5rem;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.7rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+            .navbar-brand i {
+                font-size: 2rem;
+                background: linear-gradient(45deg, var(--secondary), var(--primary));
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+
+        .navbar-nav .nav-link {
+            font-weight: 600;
+            margin: 0 0.3rem;
+            border-radius: 10px;
+            padding: 0.5rem 0.8rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.2s ease;
+        }
+
+            .navbar-nav .nav-link:hover,
+            .navbar-nav .nav-link.active {
+                background: rgba(20,184,166,0.15);
+                color: var(--dark);
+            }
+
+        .dropdown-menu {
+            border-radius: 12px;
+            border: none;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            padding: 0.5rem 0;
+            background: var(--light);
+        }
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.6rem 1.2rem;
+            transition: all 0.2s ease;
+        }
+
+            .dropdown-item:hover {
+                background: linear-gradient(90deg, var(--secondary), var(--primary));
+                color: var(--light);
+            }
+
+        .navbar-toggler {
+            border: none;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border-radius: 10px;
+            padding: 0.25rem 0.5rem;
+        }
+
+            .navbar-toggler:hover {
+                transform: scale(1.1);
+            }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-custom py-3">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <i class="fa-solid fa-warehouse"></i> WareFlow
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+                <span class="navbar-toggler-icon bg-light rounded"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav ms-auto">
+
+                    <!-- Admin -->
+                    @if (User.HasClaim("Group", "Admin"))
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                <i class="fa-solid fa-users-gear"></i> Users
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/User/SignUpPage"><i class="fa-solid fa-user-plus"></i> Add User</a></li>
+                                <li><a class="dropdown-item" href="/User/ViewActiveUsers"><i class="fa-solid fa-user-check"></i> Active Users</a></li>
+                                <li><a class="dropdown-item" href="/User/ViewDeactiveUsers"><i class="fa-solid fa-user-slash"></i> Deactivated Users</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                <i class="fa-solid fa-layer-group"></i> Groups
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/Group/AddGroupPage"><i class="fa-solid fa-plus"></i> Add Group</a></li>
+                                <li><a class="dropdown-item" href="/Group/ViewActivatedGroups"><i class="fa-solid fa-eye"></i> Active Groups</a></li>
+                                <li><a class="dropdown-item" href="/Group/ViewDeactivatedGroups"><i class="fa-solid fa-eye-slash"></i> Deactivated Groups</a></li>
+                            </ul>
+                        </li>
+                    }
+
+                    <!-- Warehouse Manager -->
+                    @if (User.HasClaim("Group", "Warehouse Manager"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Warehouse/ViewActivatedWherehouse"><i class="fa-solid fa-building-circle-check"></i> Active Warehouses</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Warehouse/ViewDeactivatedWherehouse"><i class="fa-solid fa-building-circle-xmark"></i> Deactivated Warehouses</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                <i class="fa-solid fa-inbox"></i> Requests
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="dropdown-item">
+                                    <a class="nav-link" href="/Request/ViewPendingRequest"><i class="fa-solid fa-inbox"></i>Inbox
+                                    </a>
+                                </li>
+                                <li >
+                                    <a class="dropdown-item" href="/Request/ViewRequestsLogs"> <i class="bi bi-archive"></i> Requests logs</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                    }
+                    <!-- Manager --> @if (User.HasClaim("Group", "Manager"))
+                    {
+                        <li class="nav-item"> <a class="nav-link active" href="/Warehouse/ViewActivatedWherehouse"><i class="fa-solid fa-building-circle-check"></i> Activated Warehouses</a> </li>
+                        <li class="nav-item"> <a class="nav-link active" href="/Warehouse/ViewDeactivatedWherehouse"><i class="fa-solid fa-building-circle-xmark"></i> Deactivated Warehouses</a> </li>
+                        <li class="nav-item"> <a class="nav-link" href="/Warehouse/AddWarehousestartPage"><i class="fa-solid fa-plus"></i> Add Warehouse</a> </li>
+                     
+                       
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                <i class="fa-solid fa-inbox"></i> Requests
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="dropdown-item">
+                                    <a class="nav-link" href="/Request/ViewPendingRequest">
+                                        <i class="fa-solid fa-inbox"></i>
+                                        Inbox
+                                    </a>
+                                </li>
+                                <li >
+                                    <a class=" dropdown-item" href="/Request/ViewRequestsLogs"><i class="bi bi-archive"></i> Requests logs</a>
+                                </li>
+                            </ul>
+                        </li>
+                  
+            
+                    }
+
+                    <!-- Employee -->
+                    @if (User.HasClaim("Group", "Employee"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="/WarehouseItems/ViewActivatedWarehouseItems"><i class="fa-solid fa-box-check"></i> Active Items</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/WarehouseItems/ViewDeactivatedWarehouseItems"><i class="fa-solid fa-box-open"></i> Deactivated Items</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/WarehouseItems/AddWarehoueItemsPage"><i class="fa-solid fa-plus"></i> Add Item</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                <i class="fa-solid fa-inbox"></i> Requests
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/Request/ViewUserRequest"><i class="fa-solid fa-list"></i> All Requests</a></li>
+                                <li><a class="dropdown-item" href="/Request/ViewPendingRequest"><i class="fa-solid fa-hourglass-half"></i> Uncompleted</a></li>
+                                <li >
+                                    <a class="dropdown-item" href="/Request/ViewRequestsLogs"><i class="bi bi-archive"></i> Requests logs</a>
+                                </li>
+                            </ul>
+                        </li>
+                    }
+
+                    <!-- More -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="fa-solid fa-ellipsis"></i> More
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#"><i class="fa-solid fa-gear"></i> Settings</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fa-solid fa-circle-info"></i> Help</a></li>
+                            <li><a class="dropdown-item" href="/Account/Logout"><i class="fa-solid fa-right-to-bracket"></i> Log Out</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    @RenderBody()
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js"></script> @RenderSection("Scripts", required: false)
+</body>
+</html>

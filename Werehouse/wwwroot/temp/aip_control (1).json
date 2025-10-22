@@ -1,0 +1,141 @@
+{
+  "ruleChain": {
+    "name": "AIP control",
+    "type": "CORE",
+    "firstRuleNodeId": null,
+    "root": false,
+    "debugMode": true,
+    "configuration": null,
+    "additionalInfo": {
+      "description": ""
+    }
+  },
+  "metadata": {
+    "version": 61,
+    "firstNodeIndex": 1,
+    "nodes": [
+      {
+        "type": "org.thingsboard.rule.engine.transform.TbTransformMsgNode",
+        "name": "Msg",
+        "debugSettings": {
+          "failuresEnabled": true,
+          "allEnabled": false,
+          "allEnabledUntil": 1739178696773
+        },
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "JS",
+          "jsScript": "var t;\n/*turn on */\n\nif (msg.ss_ST==1){\n     t = {\"downlinks\": [{\"frm_payload\": \"BwEA/w==\", \"confirmed\": false, \"f_port\": 1}]};\n\n\n\n\n}\n/*turn off*/\nelse if(msg.ss_ST==0){\n    \n     t = \n{\"downlinks\": [{\"frm_payload\": \"BwAA/w==\", \"confirmed\": false, \"f_port\": 1}]};\n}\n\n\n\nreturn {msg: t, metadata: metadata, msgType: \"POST_TELEMETRY_REQUEST\"};",
+          "tbelScript": "return {msg: {{\"downlinks\":[{\"frm_payload\":\"CBA=\",\"confirmed\":false,\"f_port\":1}]}}}, metadata: metadata, msgType: msgType};"
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 709,
+          "layoutY": 186
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.filter.TbJsSwitchNode",
+        "name": "fliter",
+        "debugSettings": {
+          "failuresEnabled": true,
+          "allEnabled": false,
+          "allEnabledUntil": 1739178696773
+        },
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "TBEL",
+          "jsScript": "function nextRelation(metadata, msg) {\n    return ['one','nine'];\n}\nif(msgType === 'POST_TELEMETRY_REQUEST') {\n    return ['two'];\n}\nreturn nextRelation(metadata, msg);",
+          "tbelScript": "var command;\n\nif(msg.ss_manual1==1){\n    \n  command = \"valvecontrol\";\n}\nelse {\n  command = \"nothing\";  \n}\n\nreturn command;"
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 369,
+          "layoutY": 176
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.telemetry.TbMsgAttributesNode",
+        "name": "nothing",
+        "debugSettings": null,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 2,
+        "configuration": {
+          "scope": "SERVER_SCOPE",
+          "notifyDevice": false,
+          "sendAttributesUpdatedNotification": false,
+          "updateAttributesOnlyOnValueChange": true
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 535,
+          "layoutY": 402
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.rest.TbRestApiCallNode",
+        "name": "API Things",
+        "debugSettings": {
+          "failuresEnabled": true,
+          "allEnabled": false,
+          "allEnabledUntil": 1739178823286
+        },
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 3,
+        "configuration": {
+          "restEndpointUrlPattern": "https://traklink.as1.cloud.thethings.industries/api/v3/as/applications/smart-office/devices/controller/down/push",
+          "requestMethod": "POST",
+          "useSimpleClientHttpFactory": false,
+          "parseToPlainText": false,
+          "ignoreRequestBody": false,
+          "enableProxy": false,
+          "useSystemProxyProperties": false,
+          "proxyScheme": null,
+          "proxyHost": null,
+          "proxyPort": 0,
+          "proxyUser": null,
+          "proxyPassword": null,
+          "readTimeoutMs": 0,
+          "maxParallelRequestsCount": 0,
+          "headers": {
+            "Content-Type": "application/json",
+            "authorization": "Bearer NNSXS.YZ3JLJSLZYJFTFSA5VMO6BJ3AJFWDGUK2W2GHSI.NXKZUUVWNIIKA5FP3F3L45SYKZ6DHWVV75IRKLOLSSPBHW26VI4Q"
+          },
+          "credentials": {
+            "type": "anonymous"
+          },
+          "maxInMemoryBufferSizeInKb": "1024"
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 811,
+          "layoutY": 326
+        }
+      }
+    ],
+    "connections": [
+      {
+        "fromIndex": 0,
+        "toIndex": 3,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 1,
+        "toIndex": 0,
+        "type": "valvecontrol"
+      },
+      {
+        "fromIndex": 1,
+        "toIndex": 2,
+        "type": "nothing"
+      }
+    ],
+    "ruleChainConnections": null
+  }
+}

@@ -1,0 +1,214 @@
+﻿@using Warehouse.Models
+@model UserInfo
+@{
+    ViewData["Title"] = "SignUpPage";
+    Layout = "~/Views/Shared/NavBar.cshtml";
+}
+
+<style>
+    :root {
+        --brand: #14b8a6; /* Light teal */
+        --brand-600: #0d9488;
+        --accent: #fbbf24; /* Soft gold */
+        --ink: #374151; /* Slate gray */
+        --muted: #6b7280;
+        --bg: #fafafa; /* Light background */
+    }
+
+    .page-bg {
+        background: linear-gradient(180deg, #ffffff, #f9fafb 60%, #fef9f3 100%);
+        min-height: calc(100vh - 64px);
+        display: flex;
+        align-items: center;
+        padding: 2.5rem 1rem;
+    }
+
+    .auth-shell {
+        max-width: 1100px;
+        margin: 0 auto;
+        background: #fff;
+        border-radius: 20px;
+        border: 1px solid #f3f4f6;
+        overflow: hidden;
+        box-shadow: 0 8px 30px rgba(0,0,0,.08);
+    }
+
+    /* Left branding panel */
+    .left-pane {
+        height: 100%;
+        background: linear-gradient(135deg, #ecfdf5 0%, #fef9f3 100%);
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+    }
+
+        .left-pane .brand {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: .6rem;
+            font-weight: 800;
+            font-size: 1.3rem;
+            color: var(--brand);
+        }
+
+        .left-pane h3 {
+            margin: 1rem 0 .25rem;
+            font-weight: 800;
+            font-size: 1.8rem;
+            color: var(--ink);
+        }
+
+        .left-pane p {
+            color: var(--muted);
+            margin-bottom: 1.25rem;
+        }
+
+    .badge-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: .4rem;
+        padding: .35rem .8rem;
+        border-radius: 999px;
+        background: rgba(20,184,166,.1);
+        color: var(--brand-600);
+        font-weight: 600;
+        margin: .3rem;
+        border: 1px solid rgba(20,184,166,.15);
+    }
+
+    /* Right panel - form */
+    .right-pane {
+        padding: 2rem;
+    }
+
+    .form-label {
+        color: var(--ink);
+        font-weight: 600;
+    }
+
+    .form-control {
+        border-color: #e5e7eb;
+        border-radius: 12px;
+    }
+
+        .form-control:focus {
+            border-color: var(--brand);
+            box-shadow: 0 0 0 .2rem rgba(20,184,166,.15);
+        }
+
+    .btn-brand {
+        background: linear-gradient(90deg, var(--accent), var(--brand));
+        color: #1f2937;
+        border: none;
+        border-radius: 12px;
+        transition: all .25s ease-in-out;
+        font-weight: 600;
+        box-shadow: 0 6px 15px rgba(20,184,166,.2);
+    }
+
+        .btn-brand:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.03);
+            box-shadow: 0 10px 20px rgba(20,184,166,.3);
+        }
+
+    .small-muted {
+        color: var(--muted);
+    }
+</style>
+
+<div class="page-bg">
+    <div class="auth-shell">
+        <div class="row g-0">
+            <!-- Left branding panel -->
+            <div class="col-lg-6 d-none d-lg-block">
+                <div class="left-pane">
+                    <div class="brand">
+                        <i class="fa-solid fa-warehouse"></i><span> WareFlow</span>
+                    </div>
+                    <h3>Join WareFlow</h3>
+                    <p>Light, modern, and secure onboarding for your warehouse operations.</p>
+                    <div>
+                        <span class="badge-chip"><i class="fa-solid fa-lock"></i> Secure</span>
+                        <span class="badge-chip"><i class="fa-solid fa-gauge-high"></i> Fast</span>
+                        <span class="badge-chip"><i class="fa-solid fa-boxes-stacked"></i> Warehouse Ready</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right form -->
+            <div class="col-lg-6 col-12">
+                <div class="right-pane">
+                    <form method="post" >
+                        @Html.AntiForgeryToken()
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                        <div class="row g-3">
+                            <!-- First / Last name -->
+                            <div class="col-md-6">
+                                <label asp-for="FirstName" class="form-label">First name</label>
+                                <input asp-for="FirstName" class="form-control" placeholder="John" />
+                                <span asp-validation-for="FirstName" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="LastName" class="form-label">Last name</label>
+                                <input asp-for="LastName" class="form-control" placeholder="Doe" />
+                                <span asp-validation-for="LastName" class="text-danger small"></span>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="col-12">
+                                <label asp-for="Email" class="form-label">Email</label>
+                                <input asp-for="Email" class="form-control" type="email" placeholder="name@example.com" />
+                                <small class="small-muted">We’ll never share your email.</small>
+                                <span asp-validation-for="Email" class="text-danger small"></span>
+                            </div>
+
+                    
+                            @if ((bool)ViewData["create"] == true)
+                            {
+                                <!-- Passwords -->
+                                <div class="col-md-6">
+                                    <label asp-for="Password" class="form-label">Password</label>
+                                    <input asp-for="Password" class="form-control" type="password" id="PasswordInput" />
+                                    <span asp-validation-for="Password" class="text-danger small"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label asp-for="ConfirmPassword" class="form-label">Confirm password</label>
+                                    <input asp-for="ConfirmPassword" class="form-control" type="password" id="ConfirmPasswordInput" />
+                                    <span asp-validation-for="ConfirmPassword" class="text-danger small"></span>
+                                </div>
+
+                                <!-- Submit -->
+                                <div class="col-12 pt-1">
+                                    <button id="SignUpBtn" class="btn btn-brand w-100 py-2 fw-semibold" asp-controller="User" asp-action="SignUp">
+                                        <i class="fa-solid fa-user-plus me-2"></i> Sign up
+                                    </button>
+                                </div>
+
+
+                            }
+
+                            else
+                            {
+
+                                <input class="form-control" type="hidden" name="id" value="@Model.id" />
+
+                                <div class="col-12 pt-1">
+                                    <button id="SignUpBtn" class="btn btn-brand w-100 py-2 fw-semibold" asp-controller="User" asp-action="EditUser">
+                                       Update User
+                                    </button>
+                                </div>
+                            }
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

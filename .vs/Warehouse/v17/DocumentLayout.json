@@ -1,0 +1,298 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\inetpub\\wwwroot\\Werehouse\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{E6D2C278-D94C-41FE-B074-6F130C903843}|Werehouse\\Warehouse.csproj|c:\\inetpub\\wwwroot\\werehouse\\werehouse\\views\\account\\accessdenied.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E6D2C278-D94C-41FE-B074-6F130C903843}|Werehouse\\Warehouse.csproj|solutionrelative:werehouse\\views\\account\\accessdenied.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E6D2C278-D94C-41FE-B074-6F130C903843}|Werehouse\\Warehouse.csproj|c:\\inetpub\\wwwroot\\werehouse\\werehouse\\views\\shared\\navbar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E6D2C278-D94C-41FE-B074-6F130C903843}|Werehouse\\Warehouse.csproj|solutionrelative:werehouse\\views\\shared\\navbar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E6D2C278-D94C-41FE-B074-6F130C903843}|Werehouse\\Warehouse.csproj|c:\\inetpub\\wwwroot\\werehouse\\werehouse\\services\\groupservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E6D2C278-D94C-41FE-B074-6F130C903843}|Werehouse\\Warehouse.csproj|solutionrelative:werehouse\\services\\groupservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E6D2C278-D94C-41FE-B074-6F130C903843}|Werehouse\\Warehouse.csproj|c:\\inetpub\\wwwroot\\werehouse\\werehouse\\services\\cityservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E6D2C278-D94C-41FE-B074-6F130C903843}|Werehouse\\Warehouse.csproj|solutionrelative:werehouse\\services\\cityservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E6D2C278-D94C-41FE-B074-6F130C903843}|Werehouse\\Warehouse.csproj|c:\\inetpub\\wwwroot\\werehouse\\werehouse\\services\\accountservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E6D2C278-D94C-41FE-B074-6F130C903843}|Werehouse\\Warehouse.csproj|solutionrelative:werehouse\\services\\accountservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E6D2C278-D94C-41FE-B074-6F130C903843}|Werehouse\\Warehouse.csproj|c:\\inetpub\\wwwroot\\werehouse\\werehouse\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E6D2C278-D94C-41FE-B074-6F130C903843}|Werehouse\\Warehouse.csproj|solutionrelative:werehouse\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E6D2C278-D94C-41FE-B074-6F130C903843}|Werehouse\\Warehouse.csproj|c:\\inetpub\\wwwroot\\werehouse\\werehouse\\views\\user\\viewusers.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E6D2C278-D94C-41FE-B074-6F130C903843}|Werehouse\\Warehouse.csproj|solutionrelative:werehouse\\views\\user\\viewusers.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E6D2C278-D94C-41FE-B074-6F130C903843}|Werehouse\\Warehouse.csproj|c:\\inetpub\\wwwroot\\werehouse\\werehouse\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E6D2C278-D94C-41FE-B074-6F130C903843}|Werehouse\\Warehouse.csproj|solutionrelative:werehouse\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E6D2C278-D94C-41FE-B074-6F130C903843}|Werehouse\\Warehouse.csproj|c:\\inetpub\\wwwroot\\werehouse\\werehouse\\mappings\\mappingprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E6D2C278-D94C-41FE-B074-6F130C903843}|Werehouse\\Warehouse.csproj|solutionrelative:werehouse\\mappings\\mappingprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E6D2C278-D94C-41FE-B074-6F130C903843}|Werehouse\\Warehouse.csproj|c:\\inetpub\\wwwroot\\werehouse\\werehouse\\views\\country\\addcountry.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E6D2C278-D94C-41FE-B074-6F130C903843}|Werehouse\\Warehouse.csproj|solutionrelative:werehouse\\views\\country\\addcountry.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E6D2C278-D94C-41FE-B074-6F130C903843}|Werehouse\\Warehouse.csproj|c:\\inetpub\\wwwroot\\werehouse\\werehouse\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E6D2C278-D94C-41FE-B074-6F130C903843}|Werehouse\\Warehouse.csproj|solutionrelative:werehouse\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E6D2C278-D94C-41FE-B074-6F130C903843}|Werehouse\\Warehouse.csproj|c:\\inetpub\\wwwroot\\werehouse\\werehouse\\views\\request\\requestdetails.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E6D2C278-D94C-41FE-B074-6F130C903843}|Werehouse\\Warehouse.csproj|solutionrelative:werehouse\\views\\request\\requestdetails.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E6D2C278-D94C-41FE-B074-6F130C903843}|Werehouse\\Warehouse.csproj|c:\\inetpub\\wwwroot\\werehouse\\werehouse\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{E6D2C278-D94C-41FE-B074-6F130C903843}|Werehouse\\Warehouse.csproj|solutionrelative:werehouse\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E6D2C278-D94C-41FE-B074-6F130C903843}|Werehouse\\Warehouse.csproj|c:\\inetpub\\wwwroot\\werehouse\\werehouse\\views\\warehouse\\addwarehouse.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E6D2C278-D94C-41FE-B074-6F130C903843}|Werehouse\\Warehouse.csproj|solutionrelative:werehouse\\views\\warehouse\\addwarehouse.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E6D2C278-D94C-41FE-B074-6F130C903843}|Werehouse\\Warehouse.csproj|c:\\inetpub\\wwwroot\\werehouse\\werehouse\\views\\warehouse\\viewwharehouse.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E6D2C278-D94C-41FE-B074-6F130C903843}|Werehouse\\Warehouse.csproj|solutionrelative:werehouse\\views\\warehouse\\viewwharehouse.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E6D2C278-D94C-41FE-B074-6F130C903843}|Werehouse\\Warehouse.csproj|c:\\inetpub\\wwwroot\\werehouse\\werehouse\\views\\request\\inboxrequest.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E6D2C278-D94C-41FE-B074-6F130C903843}|Werehouse\\Warehouse.csproj|solutionrelative:werehouse\\views\\request\\inboxrequest.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E6D2C278-D94C-41FE-B074-6F130C903843}|Werehouse\\Warehouse.csproj|c:\\inetpub\\wwwroot\\werehouse\\werehouse\\controllers\\requestcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E6D2C278-D94C-41FE-B074-6F130C903843}|Werehouse\\Warehouse.csproj|solutionrelative:werehouse\\controllers\\requestcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "RequestController.cs",
+              "DocumentMoniker": "C:\\inetpub\\wwwroot\\Werehouse\\Werehouse\\Controllers\\RequestController.cs",
+              "RelativeDocumentMoniker": "Werehouse\\Controllers\\RequestController.cs",
+              "ToolTip": "C:\\inetpub\\wwwroot\\Werehouse\\Werehouse\\Controllers\\RequestController.cs",
+              "RelativeToolTip": "Werehouse\\Controllers\\RequestController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACEAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-02T07:33:20.461Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "GroupServices.cs",
+              "DocumentMoniker": "C:\\inetpub\\wwwroot\\Werehouse\\Werehouse\\services\\GroupServices.cs",
+              "RelativeDocumentMoniker": "Werehouse\\services\\GroupServices.cs",
+              "ToolTip": "C:\\inetpub\\wwwroot\\Werehouse\\Werehouse\\services\\GroupServices.cs",
+              "RelativeToolTip": "Werehouse\\services\\GroupServices.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-16T18:25:30.995Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AccountServices.cs",
+              "DocumentMoniker": "C:\\inetpub\\wwwroot\\Werehouse\\Werehouse\\services\\AccountServices.cs",
+              "RelativeDocumentMoniker": "Werehouse\\services\\AccountServices.cs",
+              "ToolTip": "C:\\inetpub\\wwwroot\\Werehouse\\Werehouse\\services\\AccountServices.cs",
+              "RelativeToolTip": "Werehouse\\services\\AccountServices.cs",
+              "ViewState": "AgIAADAAAAAAAAAAAAAYwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-16T18:25:23.177Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AccessDenied.cshtml",
+              "DocumentMoniker": "C:\\inetpub\\wwwroot\\Werehouse\\Werehouse\\Views\\Account\\AccessDenied.cshtml",
+              "RelativeDocumentMoniker": "Werehouse\\Views\\Account\\AccessDenied.cshtml",
+              "ToolTip": "C:\\inetpub\\wwwroot\\Werehouse\\Werehouse\\Views\\Account\\AccessDenied.cshtml",
+              "RelativeToolTip": "Werehouse\\Views\\Account\\AccessDenied.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-16T18:24:42.111Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ViewUsers.cshtml",
+              "DocumentMoniker": "C:\\inetpub\\wwwroot\\Werehouse\\Werehouse\\Views\\User\\ViewUsers.cshtml",
+              "RelativeDocumentMoniker": "Werehouse\\Views\\User\\ViewUsers.cshtml",
+              "ToolTip": "C:\\inetpub\\wwwroot\\Werehouse\\Werehouse\\Views\\User\\ViewUsers.cshtml",
+              "RelativeToolTip": "Werehouse\\Views\\User\\ViewUsers.cshtml",
+              "ViewState": "AgIAAOEAAAAAAAAAAAAAAPsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-16T18:08:03.345Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "UserController.cs",
+              "DocumentMoniker": "C:\\inetpub\\wwwroot\\Werehouse\\Werehouse\\Controllers\\UserController.cs",
+              "RelativeDocumentMoniker": "Werehouse\\Controllers\\UserController.cs",
+              "ToolTip": "C:\\inetpub\\wwwroot\\Werehouse\\Werehouse\\Controllers\\UserController.cs",
+              "RelativeToolTip": "Werehouse\\Controllers\\UserController.cs",
+              "ViewState": "AgIAAHwAAAAAAAAAAADwvwYAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-16T17:50:10.077Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "C:\\inetpub\\wwwroot\\Werehouse\\Werehouse\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "Werehouse\\Controllers\\AccountController.cs",
+              "ToolTip": "C:\\inetpub\\wwwroot\\Werehouse\\Werehouse\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "Werehouse\\Controllers\\AccountController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-16T17:49:56.328Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CityServices.cs",
+              "DocumentMoniker": "C:\\inetpub\\wwwroot\\Werehouse\\Werehouse\\services\\CityServices.cs",
+              "RelativeDocumentMoniker": "Werehouse\\services\\CityServices.cs",
+              "ToolTip": "C:\\inetpub\\wwwroot\\Werehouse\\Werehouse\\services\\CityServices.cs",
+              "RelativeToolTip": "Werehouse\\services\\CityServices.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-06T06:50:57.261Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "AddCountry.cshtml",
+              "DocumentMoniker": "C:\\inetpub\\wwwroot\\Werehouse\\Werehouse\\Views\\Country\\AddCountry.cshtml",
+              "RelativeDocumentMoniker": "Werehouse\\Views\\Country\\AddCountry.cshtml",
+              "ToolTip": "C:\\inetpub\\wwwroot\\Werehouse\\Werehouse\\Views\\Country\\AddCountry.cshtml",
+              "RelativeToolTip": "Werehouse\\Views\\Country\\AddCountry.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-06T06:50:48.879Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\inetpub\\wwwroot\\Werehouse\\Werehouse\\Program.cs",
+              "RelativeDocumentMoniker": "Werehouse\\Program.cs",
+              "ToolTip": "C:\\inetpub\\wwwroot\\Werehouse\\Werehouse\\Program.cs",
+              "RelativeToolTip": "Werehouse\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-06T06:48:05.282Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "MappingProfile.cs",
+              "DocumentMoniker": "C:\\inetpub\\wwwroot\\Werehouse\\Werehouse\\Mappings\\MappingProfile.cs",
+              "RelativeDocumentMoniker": "Werehouse\\Mappings\\MappingProfile.cs",
+              "ToolTip": "C:\\inetpub\\wwwroot\\Werehouse\\Werehouse\\Mappings\\MappingProfile.cs",
+              "RelativeToolTip": "Werehouse\\Mappings\\MappingProfile.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-06T06:42:41.911Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "RequestDetails.cshtml",
+              "DocumentMoniker": "C:\\inetpub\\wwwroot\\Werehouse\\Werehouse\\Views\\Request\\RequestDetails.cshtml",
+              "RelativeDocumentMoniker": "Werehouse\\Views\\Request\\RequestDetails.cshtml",
+              "ToolTip": "C:\\inetpub\\wwwroot\\Werehouse\\Werehouse\\Views\\Request\\RequestDetails.cshtml",
+              "RelativeToolTip": "Werehouse\\Views\\Request\\RequestDetails.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-05T05:51:23.041Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "InboxRequest.cshtml",
+              "DocumentMoniker": "C:\\inetpub\\wwwroot\\Werehouse\\Werehouse\\Views\\Request\\InboxRequest.cshtml",
+              "RelativeDocumentMoniker": "Werehouse\\Views\\Request\\InboxRequest.cshtml",
+              "ToolTip": "C:\\inetpub\\wwwroot\\Werehouse\\Werehouse\\Views\\Request\\InboxRequest.cshtml",
+              "RelativeToolTip": "Werehouse\\Views\\Request\\InboxRequest.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-05T05:51:16.336Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "ViewWharehouse.cshtml",
+              "DocumentMoniker": "C:\\inetpub\\wwwroot\\Werehouse\\Werehouse\\Views\\Warehouse\\ViewWharehouse.cshtml",
+              "RelativeDocumentMoniker": "Werehouse\\Views\\Warehouse\\ViewWharehouse.cshtml",
+              "ToolTip": "C:\\inetpub\\wwwroot\\Werehouse\\Werehouse\\Views\\Warehouse\\ViewWharehouse.cshtml",
+              "RelativeToolTip": "Werehouse\\Views\\Warehouse\\ViewWharehouse.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-05T05:50:25.31Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "AddWarehouse.cshtml",
+              "DocumentMoniker": "C:\\inetpub\\wwwroot\\Werehouse\\Werehouse\\Views\\Warehouse\\AddWarehouse.cshtml",
+              "RelativeDocumentMoniker": "Werehouse\\Views\\Warehouse\\AddWarehouse.cshtml",
+              "ToolTip": "C:\\inetpub\\wwwroot\\Werehouse\\Werehouse\\Views\\Warehouse\\AddWarehouse.cshtml",
+              "RelativeToolTip": "Werehouse\\Views\\Warehouse\\AddWarehouse.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-05T05:48:56.68Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "NavBar.cshtml",
+              "DocumentMoniker": "C:\\inetpub\\wwwroot\\Werehouse\\Werehouse\\Views\\Shared\\NavBar.cshtml",
+              "RelativeDocumentMoniker": "Werehouse\\Views\\Shared\\NavBar.cshtml",
+              "ToolTip": "C:\\inetpub\\wwwroot\\Werehouse\\Werehouse\\Views\\Shared\\NavBar.cshtml",
+              "RelativeToolTip": "Werehouse\\Views\\Shared\\NavBar.cshtml",
+              "ViewState": "AgIAAFQAAAAAAAAAAAAAABUAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-05T05:47:03.536Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "site.css",
+              "DocumentMoniker": "C:\\inetpub\\wwwroot\\Werehouse\\Werehouse\\wwwroot\\css\\site.css",
+              "RelativeDocumentMoniker": "Werehouse\\wwwroot\\css\\site.css",
+              "ToolTip": "C:\\inetpub\\wwwroot\\Werehouse\\Werehouse\\wwwroot\\css\\site.css",
+              "RelativeToolTip": "Werehouse\\wwwroot\\css\\site.css",
+              "ViewState": "AgIAAN0IAAAAAAAAAAAkwLAJAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-10-05T05:46:23.241Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

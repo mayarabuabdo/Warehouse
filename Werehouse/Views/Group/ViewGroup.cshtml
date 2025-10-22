@@ -1,0 +1,303 @@
+﻿@using Warehouse.Models
+@model List<GroupModel>
+@{
+    ViewData["Title"] = "ViewGroup";
+    Layout = "~/Views/Shared/NavBar.cshtml";
+}
+
+<style>
+    :root {
+        --brand: #14b8a6; /* Teal */
+        --accent: #f59e0b; /* Gold */
+        --ink: #1f2937; /* Dark text */
+        --muted: #6b7280;
+        --bg: #f6f3ee; /* Page background */
+        --card: #ffffff;
+        --shadow: rgba(0,0,0,0.1);
+    }
+
+    body {
+        background: var(--bg);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    nav.navbar {
+        margin-top: 0;
+    }
+
+    .table-wrapper {
+        display: flex;
+        justify-content: center;
+        padding: 30px;
+    }
+
+    .table-container {
+        width: 90%;
+        max-width: 850px;
+        background: var(--card);
+        border-radius: 12px;
+        box-shadow: 0 15px 40px var(--shadow);
+        padding: 1.5rem;
+    }
+
+    h2 {
+        text-align: center;
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--ink);
+        margin-bottom: 1rem;
+    }
+
+    /* Avatar at top center */
+    .avatar {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background-color: var(--brand);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin: 0 auto 1rem auto;
+    }
+
+    /* Table with outer border */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 1rem;
+        color: var(--ink);
+        margin-top: 1rem;
+        border: 2px solid var(--brand); /* Outer border only */
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    thead th {
+        padding: 0.8rem 1rem;
+        border-bottom: 2px solid var(--accent);
+        text-align: center;
+        font-weight: 600;
+        background: var(--card);
+    }
+
+    tbody td {
+        padding: 0.75rem 1rem;
+        text-align: center;
+        border-bottom: 1px solid #e0e0e0; /* Row separation */
+        border-right: 1px solid #e0e0e0; /* Column separation */
+        font-weight: 500;
+        transition: all 0.15s ease-in-out;
+    }
+
+        tbody td:last-child {
+            border-right: none; /* Remove right border for last column */
+        }
+
+    tbody tr:last-child td {
+        border-bottom: none; /* Remove bottom border for last row */
+    }
+
+    tbody tr:hover {
+        background: rgba(20, 184, 166, 0.05);
+    }
+
+    .btn-action {
+        padding: 0.35rem 0.9rem;
+        font-size: 0.85rem;
+        border-radius: 8px;
+        font-weight: 600;
+        margin: 0 2px;
+        transition: all 0.2s ease;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .btn-edit {
+        background: var(--accent);
+        color: var(--ink);
+        border: none;
+        color: #fff;
+    }
+
+        .btn-edit:hover {
+            background: #fbbf24;
+            transform: translateY(-1px);
+        }
+
+    .btn-delete {
+        background: #ef4444;
+        color: #fff;
+        border: none;
+    }
+
+        .btn-delete:hover {
+            background: #f87171;
+            transform: translateY(-1px);
+        }
+
+    .btn-add {
+        display: inline-block;
+        margin-top: 1rem;
+        background: var(--brand);
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 0.6rem 1.5rem;
+        font-weight: 600;
+        font-size: 1rem;
+        transition: all 0.25s ease-in-out;
+    }
+
+        .btn-add:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+        }
+
+    .text-end {
+        text-align: right;
+    }
+
+</style>
+
+<div class="table-wrapper">
+    <div class="table-container">
+        <div class="avatar">
+            <i class="fa-solid fa-user"></i>
+        </div>
+
+        <h2> Groups</h2>
+
+        <form method="post">
+            <table>
+                <thead>
+                    <tr>
+
+                        <th>Group Name</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (GroupModel group in Model)
+                    {
+                        <tr>
+                            <td>@group.Name</td>
+                            <td>
+
+                                @if ((bool)ViewData["Active"])
+                                {
+                                    if (!group.IsSystemDefined)
+                                    {
+                                        <a class="btn-action btn-delete" data-bs-toggle="modal" data-bs-target="#deleteModal-@group.Id">
+                                            Deactive
+                                        </a>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="deleteModal-@group.Id" tabindex="-1" aria-labelledby="deleteModalLabel-@group.Id" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content shadow-lg border-0" style="border-radius: 12px;">
+
+                                                    <!-- Modal Header -->
+                                                    <div class="modal-header" style="background: var(--brand); color: #fff; border-top-left-radius: 12px; border-top-right-radius: 12px;">
+                                                        <h5 class="modal-title" id="deleteModalLabel-@group.Id">
+                                                            Confirm Deactivation
+                                                        </h5>
+                                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+
+                                                    <!-- Modal Body -->
+                                                    <div class="modal-body text-center p-4">
+                                                        <i class="fa-solid fa-triangle-exclamation fa-2x text-danger mb-3"></i>
+                                                        <p class="mb-0" style="font-size:1rem; color: var(--ink);">
+                                                            Are you sure you want to delete group
+                                                            <strong style="color: var(--accent);">@group.Name</strong>?
+                                                        </p>
+                                                    </div>
+
+                                                    <!-- Modal Footer -->
+                                                    <div class="modal-footer d-flex justify-content-between">
+                                                        <button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">Cancel</button>
+                                                        <a class="btn btn-danger px-4" asp-controller="Group" asp-action="DeactivateGroup" asp-route-groupId="@group.Id">
+                                                            Deactive
+                                                        </a>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <a class="btn-action " style="background-color:rgb(211, 211, 211) ; color:white;" data-bs-toggle="modal" data-bs-target="#deleteModal-@group.Id">
+                                            Deactive
+                                        </a>
+                                    }
+                                }
+
+                                else
+                                {
+                                    <a class="btn-action btn-delete" data-bs-toggle="modal" data-bs-target="#deleteModal-@group.Id">
+                                        Activate
+                                    </a>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="deleteModal-@group.Id" tabindex="-1" aria-labelledby="deleteModalLabel-@group.Id" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content shadow-lg border-0" style="border-radius: 12px;">
+
+                                                <!-- Modal Header -->
+                                                <div class="modal-header" style="background: var(--brand); color: #fff; border-top-left-radius: 12px; border-top-right-radius: 12px;">
+                                                    <h5 class="modal-title" id="deleteModalLabel-@group.Id">
+                                                        Confirm Activation
+                                                    </h5>
+                                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+
+                                                <!-- Modal Body -->
+                                                <div class="modal-body text-center p-4">
+                                                    <i class="fa-solid fa-triangle-exclamation fa-2x text-danger mb-3"></i>
+                                                    <p class="mb-0" style="font-size:1rem; color: var(--ink);">
+                                                        Are you sure you want to delete group
+                                                        <strong style="color: var(--accent);">@group.Name</strong>?
+                                                    </p>
+                                                </div>
+
+                                                <!-- Modal Footer -->
+                                                <div class="modal-footer d-flex justify-content-between">
+                                                    <button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">Cancel</button>
+                                                    <a class="btn btn-add px-4" asp-controller="Group" asp-action="ActivateGroup" asp-route-groupId="@group.Id">
+                                                   Activate
+                                                    </a>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </td>
+                        </tr>
+                    }
+
+
+
+                </tbody>
+            </table>
+
+            @if ((bool)ViewData["Active"])
+            {
+                
+                    <div class="text-end mt-3">
+                <button type="submit" class="btn-add" asp-controller="Group" asp-action="AddGroupPage">
+                    <i class="fa-solid fa-plus me-2"></i> Add Group
+                </button>
+            </div>
+       
+            }
+        </form>
+    </div>
+
+</div>

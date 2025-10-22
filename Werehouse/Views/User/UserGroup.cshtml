@@ -1,0 +1,249 @@
+﻿@using Warehouse.Models
+@model VMUserInfo
+@{
+    ViewData["Title"] = "User Group";
+    Layout = "~/Views/Shared/NavBar.cshtml";
+}
+
+<style>
+    :root {
+        --brand: #14b8a6;
+        --accent: #f59e0b;
+        --ink: #1f2937;
+        --muted: #6b7280;
+        --bg: #f6f3ee;
+        --card: #ffffff;
+        --shadow: rgba(0,0,0,0.1);
+    }
+
+    body {
+        background: var(--bg);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .table-wrapper {
+        display: flex;
+        justify-content: center;
+        padding: 30px;
+    }
+
+    .table-container {
+        width: 95%;
+        max-width: 1200px;
+        background: var(--card);
+        border-radius: 12px;
+        box-shadow: 0 15px 40px var(--shadow);
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .top-btn {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 15px;
+    }
+
+    .btn-top {
+        background-color: var(--brand);
+        color: #fff;
+        padding: 0.5rem 1.2rem;
+        border-radius: 10px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.2s ease;
+    }
+
+        .btn-top:hover {
+            background-color: var(--accent);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+    h2 {
+        text-align: center;
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--ink);
+        margin-bottom: 1rem;
+    }
+
+    .avatar {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background-color: var(--brand);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin: 0 auto 1rem auto;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 1rem;
+        color: var(--ink);
+        margin-top: 1rem;
+        border: 2px solid var(--brand);
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    thead th {
+        padding: 0.8rem 1rem;
+        border-bottom: 2px solid var(--accent);
+        text-align: center;
+        font-weight: 600;
+        background: var(--card);
+    }
+
+    tbody td {
+        padding: 0.75rem 1rem;
+        text-align: center;
+        border-bottom: 1px solid #e0e0e0;
+        border-right: 1px solid #e0e0e0;
+        font-weight: 500;
+        transition: all 0.15s ease-in-out;
+    }
+
+        tbody td:last-child {
+            border-right: none;
+        }
+
+    tbody tr:last-child td {
+        border-bottom: none;
+    }
+
+    tbody tr:hover {
+        background: rgba(20, 184, 166, 0.05);
+    }
+
+    .btn-action {
+        padding: 0.35rem 0.9rem;
+        font-size: 0.85rem;
+        border-radius: 8px;
+        font-weight: 600;
+        margin: 0 2px;
+        transition: all 0.2s ease;
+        display: inline-block;
+        text-decoration: none;
+        color: #fff;
+        border: none;
+    }
+
+    .btn-edit {
+        background: var(--accent);
+    }
+
+        .btn-edit:hover {
+            background: #fbbf24;
+            transform: translateY(-1px);
+        }
+
+    .btn-delete {
+        background: #ef4444;
+    }
+
+        .btn-delete:hover {
+            background: #f87171;
+            transform: translateY(-1px);
+        }
+
+    .btn-assign {
+        background: var(--brand);
+    }
+
+        .btn-assign:hover {
+            background: var(--accent);
+            transform: translateY(-1px);
+        }
+
+    select.form-select {
+        border-radius: 8px;
+        border-color: #e0e0e0;
+        padding: 0.25rem 0.5rem;
+        height: 38px;
+    }
+</style>
+
+<div class="table-wrapper">
+    <div class="table-container">
+
+        <!-- Top button -->
+        <div class="top-btn">
+            <a asp-controller="User" asp-action="ViewActiveUsers" class="btn-top">
+                <i class="fa-solid fa-users"></i> View Activated Users
+            </a>
+        </div>
+
+        <div class="avatar">
+            <i class="fa-solid fa-users"></i>
+        </div>
+
+        <h2>User Info</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                   
+                    <th>Groups</th>
+                    <th>Assign Group</th>
+                    <th>Delete Group</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@Model.UserInfo.FirstName</td>
+                    <td>@Model.UserInfo.LastName</td>
+                  
+                    <td>
+                        @foreach (var group in Model.UserInfo.Groups)
+                        {
+                            <p>@group.Name</p>
+                        }
+                    </td>
+
+                    <!-- Assign Group -->
+                    <td>
+                        <form asp-controller="User" asp-action="AssignUserGroup" method="post">
+                            <input type="hidden" name="userId" value="@Model.UserInfo.id" />
+                            <div style="display:flex; gap:5px; justify-content:center;">
+                                <select class="form-select" name="groupId">
+                                    <option value="">Assign to new group</option>
+                                    @foreach (var group in Model.Groups)
+                                    {
+                                        <option value="@group.Id">@group.Name</option>
+                                    }
+                                </select>
+                                <button type="submit" class="btn-action btn-assign">Assign</button>
+                            </div>
+                        </form>
+                    </td>
+
+                    <!-- Delete Group -->
+                    <td>
+                        <form asp-controller="User" asp-action="DeleteUserGroup" method="post">
+                            <input type="hidden" name="userId" value="@Model.UserInfo.id" />
+                            <div style="display:flex; gap:5px; justify-content:center;">
+                                <select class="form-select" name="groupId">
+                                    <option value="">Select group to delete</option>
+                                    @foreach (var group in Model.UserInfo.Groups)
+                                    {
+                                        <option value="@group.Id">@group.Name</option>
+                                    }
+                                </select>
+                                <button type="submit" class="btn-action btn-delete">Delete</button>
+                            </div>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

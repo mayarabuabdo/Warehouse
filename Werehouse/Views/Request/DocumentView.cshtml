@@ -1,0 +1,219 @@
+﻿@using Warehouse.Models
+@model List<VMRequestDocument>
+@{
+    ViewData["Title"] = "DocumentView";
+    Layout = "~/Views/Shared/NavBar.cshtml";
+}
+
+<style>
+    :root {
+        --brand: #14b8a6; /* Teal */
+        --accent: #f59e0b; /* Gold */
+        --ink: #1f2937;
+        --bg: #f6f3ee;
+        --card: #ffffff;
+        --shadow: rgba(0,0,0,0.1);
+    }
+
+    .table-card {
+        background: var(--card);
+        border-radius: 15px;
+        box-shadow: 0 15px 40px var(--shadow);
+        padding: 2rem;
+        margin-top: 2rem;
+        border: 2px solid var(--brand);
+    }
+
+        .table-card h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-align: center;
+            color: var(--ink);
+            margin-bottom: 1.5rem;
+        }
+
+    .custom-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+    }
+
+        .custom-table thead {
+            background: linear-gradient(90deg, var(--accent), var(--brand));
+            color: #fff;
+        }
+
+        .custom-table th, .custom-table td {
+            padding: 0.9rem 1rem;
+            text-align: center;
+            vertical-align: middle;
+            border-bottom: 1px solid #e5e7eb;
+            color: var(--ink);
+            font-weight: 600;
+        }
+
+        .custom-table tr:last-child td {
+            border-bottom: none;
+        }
+
+    /* Custom file input */
+    .file-input-wrapper {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        justify-content: center;
+    }
+
+        .file-input-wrapper input[type="file"] {
+            display: none; /* hide default input */
+        }
+
+    .file-input-btn {
+        background: linear-gradient(90deg, var(--accent), var(--brand));
+        border: none;
+        border-radius: 8px;
+        padding: 0.5rem 1rem;
+        color: #fff;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.25s ease-in-out;
+        font-size: 0.9rem;
+    }
+
+        .file-input-btn:hover {
+            filter: brightness(1.05);
+            transform: translateY(-1px);
+        }
+
+    .file-name {
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: var(--ink);
+        max-width: 150px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .btn-delete {
+        background: #ef4444;
+        border: none;
+        border-radius: 8px;
+        padding: 0.5rem 1rem;
+        color: #fff;
+        cursor: pointer;
+        transition: all 0.25s ease-in-out;
+    }
+
+        .btn-delete:hover {
+            background: #dc2626;
+            transform: translateY(-2px);
+        }
+
+    .btn-link {
+        background: transparent;
+        border: none;
+        color: var(--brand);
+        font-weight: 600;
+        text-decoration: underline;
+        cursor: pointer;
+        font-size: 0.95rem;
+    }
+
+        .btn-link:hover {
+            color: var(--accent);
+        }
+
+    .td-center {
+        text-align: center;
+        vertical-align: middle;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="table-card">
+                <h2>Request Documents</h2>
+
+                <form asp-action="UploadDocument" asp-controller="Request" method="post" enctype="multipart/form-data">
+                    <div class="table-responsive">
+                        <table class="custom-table">
+                            <thead>
+                                <tr>
+                                    <th>Document Name</th>
+                                    <th>File</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.Count > 0)
+                                {
+
+                                    @for (int i = 0; i < Model.Count; i++)
+                                    {
+                                        var document = Model[i];
+                                        <tr>
+                                            <td>@document.DocumentName</td>
+                                            <td class="td-center">
+                                                @if (document.DocPath == null)
+                                                {
+                                                    <div class="file-input-wrapper">
+                                                        <label class="file-input-btn" for="file_@i">Choose File</label>
+                                                        <span class="file-name" id="fileName_@i">No file chosen</span>
+                                                        <input type="file" id="file_@i" name="requestDocument[@i].DocumentFile"
+                                                               onchange="document.getElementById('fileName_@i').innerText = this.files[0]?.name || 'No file chosen';" />
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <a href="@document.DocPath" target="_blank" class="btn-link">
+                                                        <i class="fa-solid fa-paperclip"></i> Show File
+                                                    </a>
+                                                }
+                                            </td>
+                                            <td class="td-center">
+                                                @if (document.DocPath != null)
+                                                {
+                                                    <form method="post" style="display:inline-block;">
+                                                        <input type="hidden" name="requestDocumentId" value="@document.RequestDocumentId" />
+                                                        <input type="hidden" name="requestId" value="@document.RequestId" />
+                                                        <button type="submit" class="btn-delete" asp-action="DeleteRequestDocument" asp-controller="Request">
+                                                            <i class="fa-solid fa-trash"></i> Delete
+                                                        </button>
+                                                    </form>
+                                                }
+                                            </td>
+
+                                            <!-- Hidden fields -->
+                                            <input type="hidden" name="requestDocument[@i].RequestId" value="@document.RequestId" />
+                                            <input type="hidden" name="requestDocument[@i].StepId" value="@document.StepId" />
+                                            <input type="hidden" name="requestDocument[@i].StepName" value="@document.StepName" />
+                                            <input type="hidden" name="requestDocument[@i].StatusId" value="@document.StatusId" />
+                                            <input type="hidden" name="requestDocument[@i].StatusName" value="@document.StatusName" />
+                                            <input type="hidden" name="requestDocument[@i].DocumentId" value="@document.DocumentId" />
+                                            <input type="hidden" name="requestDocument[@i].Extension" value="@document.DocPath" />
+                                            <input type="hidden" name="requestDocument[@i].DocumentName" value="@document.DocumentName" />
+                                   
+                                          
+                  
+                                        </tr>
+                                    }
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="d-flex justify-content-end mt-3">
+                        <button type="submit" class="btn-upload">
+                            <i class="fa-solid fa-cloud-arrow-up"></i> Upload
+                        </button>
+                    </div>
+
+                    <input type="hidden" name="requestId" value="@Model.First().RequestId" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

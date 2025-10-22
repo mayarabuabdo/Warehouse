@@ -1,0 +1,425 @@
+﻿@using Warehouse.Models
+@model RequestDetailswithActionVM
+@{
+    ViewData["Title"] = "RequestDetails";
+    Layout = "~/Views/Shared/NavBar.cshtml";
+}
+
+<style>
+    :root {
+        --brand: #14b8a6; /* Teal */
+        --accent: #f59e0b; /* Gold */
+        --ink: #1f2937; /* Dark text */
+        --muted: #6b7280;
+        --bg: #f6f3ee;
+        --card: #ffffff;
+        --shadow: rgba(0,0,0,0.1);
+        --light-gray: #e5e7eb;
+        --btn-doc: #f59e0b; /* Document button */
+        --btn-doc-hover: #d97706;
+    }
+
+    .request-wrapper {
+        display: flex;
+        justify-content: center;
+        padding: 1rem;
+        background: var(--bg);
+    }
+
+    .request-card {
+        background: var(--card);
+        border-radius: 15px;
+        box-shadow: 0 10px 30px var(--shadow);
+        padding: 2rem;
+        border: 2px solid var(--brand);
+        display: flex;
+        flex-direction: column;
+        width:1000px;
+        gap: 1rem;
+        max-width: 100%;
+        overflow-x: auto; /* horizontal scroll if needed */
+    }
+
+    .request-icon {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--brand), var(--accent));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        color: #fff;
+        margin: 0 auto;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    }
+
+    h2 {
+        text-align: center;
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--ink);
+        margin: 0.5rem 0 1rem 0;
+    }
+
+    .detail-row {
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+        align-items: center;
+        padding: 0.5rem 0.8rem;
+        border-bottom: 1px solid var(--light-gray);
+        font-size: 1rem;
+    }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+    .detail-label {
+        font-weight: 600;
+        color: var(--brand);
+        flex: 0 0 auto;
+        margin-right: 0.5rem;
+    }
+
+    .detail-value {
+        flex: 1 1 auto;
+        color: var(--muted);
+        font-weight: 500;
+    }
+
+    .text-nowrap {
+        white-space: nowrap;
+    }
+
+    .btn-doc {
+        display: inline-block;
+        padding: 0.4rem 0.8rem;
+        font-size: 0.85rem;
+        border-radius: 6px;
+        font-weight: 500;
+        background: var(--btn-doc);
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        white-space: nowrap;
+    }
+
+        .btn-doc:hover {
+            background: var(--btn-doc-hover);
+            text-decoration: none;
+        }
+
+    .btn-action {
+        padding: 0.7rem 1.4rem;
+        font-size: 1rem;
+        border-radius: 10px;
+        font-weight: 600;
+        margin: 0 5px 5px 5px;
+        transition: all 0.25s ease;
+        border: none;
+        cursor: pointer;
+        min-width: 130px;
+        display: inline-block;
+    }
+
+    .btn-add {
+        background: var(--brand);
+        color: #fff;
+    }
+
+        .btn-add:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+        }
+
+    .btn-delete {
+        background: #ef4444;
+        color: #fff;
+    }
+
+        .btn-delete:hover {
+            background: #dc2626;
+            transform: translateY(-2px);
+        }
+
+    .action-buttons {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 1rem;
+    }
+
+    .accordion-button {
+        background: linear-gradient(135deg, var(--brand), var(--accent));
+        color: #fff;
+        font-weight: 600;
+    }
+
+        .accordion-button:not(.collapsed) {
+            color: #fff;
+            background: linear-gradient(135deg, var(--brand), var(--accent));
+            box-shadow: inset 0 -1px 0 rgba(0,0,0,.125);
+        }
+
+    .accordion-body p {
+        margin: 0;
+    }
+
+    .table-container {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    .table th, .table td {
+        vertical-align: middle;
+    }
+
+    .table th {
+        color: var(--brand);
+    }
+
+    .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--brand);
+        text-decoration: none;
+        transition: color 0.2s ease;
+    }
+
+        .back-link:hover {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+
+        .back-link i {
+            font-size: 1.1rem;
+        }
+
+
+
+</style>
+<div class="mt-2">
+    <form method="post">
+        <a asp-action="ViewPendingRequest" asp-controller="Request" class="back-link">
+            <i class="bi bi-arrow-left"></i> Back
+        </a>
+
+
+
+    </form>
+ 
+</div>
+<div class="request-wrapper">
+    <div class="request-card">
+        <div class="request-icon">
+            <i class="fa-solid fa-box"></i>
+        </div>
+        <h2>Request Details</h2>
+
+        @if (Model.RequestDetails.RequestTypeName == "Add new WarehouseItem")
+        {
+            <div class="accordion" id="accordionPanelsStayOpenExample">
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4">
+                            Warehouse Details
+                        </button>
+                    </h2>
+                    <div id="collapse4" class="accordion-collapse collapse show">
+                        <div class="accordion-body">
+
+                            <div class="detail-row">
+                                <span class="detail-label">Warehouse Item Name:</span>
+                                <span class="detail-value">@Model.RequestDetails.Name</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Quantity:</span>
+                                <span class="detail-value">@Model.RequestDetails.Qty</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">MSRP Price:</span>
+                                <span class="detail-value">
+                                    @{
+                                        var msrp = Model.RequestDetails.MSRPPrice;
+                                        string displayMSRP = (msrp % 1 == 0) ? $"{msrp:0}" : $"{msrp:0.##}";
+                                    }
+                                    $@displayMSRP
+                                </span>
+                            </div>
+
+                            <div class="detail-row">
+                                <span class="detail-label">Cost Price:</span>
+                                <span class="detail-value">
+                                    @{
+                                        var cost = Model.RequestDetails.CostPrice;
+                                        string displayCost = (cost % 1 == 0) ? $"{cost:0}" : $"{cost:0.##}";
+                                    }
+                                    $@displayCost
+                                </span>
+                            </div>
+
+
+                            <div class="detail-row">
+                                <span class="detail-label">Warehouse Name:</span>
+                                <span class="detail-value">@Model.RequestDetails.WarehouseName</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">KU Code:</span>
+                                <span class="detail-value">@Model.RequestDetails.KUCode</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+        
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                            Previous Documents
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse ">
+                        <div class="accordion-body table-container">
+                            @if (Model.PreviousDocument != null && Model.PreviousDocument.Count > 0)
+                            {
+                                <table class="table table-bordered align-middle">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Step</th>
+                                            <th>Creator</th>
+                                            <th>Time</th>
+                                            <th>Document Name</th>
+                                            <th>Document</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var document in Model.PreviousDocument)
+                                        {
+                                            <tr>
+                                                <td class="text-nowrap">@document.StepName</td>
+                                                <td class="text-nowrap">@document.CreatedByName</td>
+                                                <td class="text-nowrap">@document.CreatedAt</td>
+                                                <td class="text-nowrap">@document.DocumentName</td>
+                                                <td class="text-nowrap">
+                                                    @if (document.FileExtentionType == "image")
+                                                    {
+                                                        <img src="@document.Extension" width="50" />
+                                                    }
+                                                    else
+                                                    {
+
+                                                        <img src="/temp/@document.FileExtentionType" width="50" />
+                                                    }
+                                  
+                                                    <a class="btn-doc" href="@document.Extension" target="_blank">Show File</a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            }
+                            else
+                            {
+                                <p>No Documents Attached</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                            Attached Documents
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse">
+                        <div class="accordion-body table-container">
+                            @if (Model.RequestDocuments != null && Model.RequestDocuments.Count > 0)
+                            {
+                                foreach (var document in Model.RequestDocuments)
+                                {
+                                    <div class="detail-row d-flex justify-content-between" style="gap: 1rem; align-items: center;">
+                                        <span class="detail-label text-nowrap">@document.DocumentName:</span>
+                                        <a class="btn-doc" href="@document.Extension" target="_blank">Show File</a>
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <p>No Documents Attached</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                            Request Log
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse">
+                        <div class="accordion-body">
+                            @if(Model.RequestLogs !=null && Model.RequestLogs.Count > 0)
+                            {
+                                <table class="table table-bordered align-middle">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Step</th>
+                                            <th>Status</th>
+                                            <th>Action Token by </th>
+                                            <th>Time</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var log in Model.RequestLogs)
+                                        {
+                                            <tr>
+                                                <td class="text-nowrap">@log.StepName</td>
+                                                <td class="text-nowrap">@log.StatusName</td>
+                                                <td class="text-nowrap">@log.ActionTokenByName</td>
+                                                <td class="text-nowrap">@log.ActionTokenAt</td>
+                                                <td class="text-nowrap">@log.ActionName </td>
+                                           
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <form method="post" asp-controller="Request" asp-action="DoAction">
+                    <input name="requestId" type="hidden" value="@Model.RequestDetails.RequestId" />
+                    @if (Model.Actions != null && Model.Actions.Count != 0)
+                    {
+                        @foreach (var action in Model.Actions)
+                        {
+                            <button class="btn-action @action.ButtonStyle"
+                                    type="submit"
+                                    name="actionId"
+                                    value="@action.Id">
+                                @action.Name
+                            </button>
+                        }
+                    }
+                </form>
+            </div>
+        }
+    </div>
+</div>

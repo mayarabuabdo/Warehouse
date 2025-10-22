@@ -1,0 +1,290 @@
+﻿@using Warehouse.Models
+@model List<VMUser>
+@{
+    ViewData["Title"] = "View Users";
+    Layout = "~/Views/Shared/NavBar.cshtml";
+}
+
+<style>
+    :root {
+        --brand: #14b8a6; /* Teal */
+        --accent: #f59e0b; /* Gold */
+        --ink: #1f2937; /* Dark text */
+        --muted: #6b7280;
+        --bg: #f6f3ee; /* Page background */
+        --card: #ffffff;
+        --shadow: rgba(0,0,0,0.1);
+        --light-gray: #e5e7eb;
+    }
+
+    body {
+        background: var(--bg);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .table-wrapper {
+        display: flex;
+        justify-content: center;
+        padding: 30px;
+    }
+
+    .table-container {
+        width: 100%;
+        max-width: 1200px;
+        background: var(--card);
+        border-radius: 12px;
+        box-shadow: 0 15px 40px var(--shadow);
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+    }
+
+    h2 {
+        text-align: center;
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--ink);
+        margin-bottom: 1rem;
+    }
+
+    /* User Icon */
+    .avatar {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--brand), var(--accent));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.8rem;
+        color: #fff;
+        margin: 0 auto 1rem auto;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    }
+
+    .table-responsive {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        border-radius: 10px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 1rem;
+        color: var(--ink);
+        margin-top: 1rem;
+        border: 2px solid var(--brand);
+        border-radius: 8px;
+        overflow: hidden;
+        min-width: 700px;
+    }
+
+    /* Simple, clean table header */
+    thead th {
+        padding: 0.8rem 1rem;
+        text-align: center;
+        font-weight: 600;
+        background: var(--card); /* same as card background */
+        color: var(--ink);
+        position: relative;
+    }
+
+        thead th::after {
+            content: "";
+            display: block;
+            height: 3px;
+            width: 100%;
+            background: var(--accent); /* subtle accent line */
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+
+    tbody td {
+        padding: 0.75rem 1rem;
+        text-align: center;
+        border-bottom: 1px solid var(--light-gray);
+        border-right: 1px solid var(--light-gray);
+        font-weight: 500;
+        transition: all 0.15s ease-in-out;
+    }
+
+        tbody td:last-child {
+            border-right: none;
+        }
+
+    tbody tr:last-child td {
+        border-bottom: none;
+    }
+
+    tbody tr:hover {
+        background: rgba(20, 184, 166, 0.05);
+    }
+
+    .btn-action,
+    .btn-actiondisabled {
+        padding: 0.35rem 0.9rem;
+        font-size: 0.85rem;
+        border-radius: 8px;
+        font-weight: 600;
+        margin: 0 2px;
+        transition: all 0.2s ease;
+        display: inline-block;
+        text-decoration: none;
+        color: #fff;
+        border: none;
+    }
+
+    .btn-edit {
+        background: var(--accent);
+    }
+
+        .btn-edit:hover {
+            background: #fbbf24;
+            transform: translateY(-1px);
+        }
+
+    .btn-delete {
+        background: #ef4444;
+    }
+
+        .btn-delete:hover {
+            background: #f87171;
+            transform: translateY(-1px);
+        }
+
+    .btn-assign {
+        background: var(--brand);
+    }
+
+        .btn-assign:hover {
+            background: var(--accent);
+            transform: translateY(-1px);
+        }
+
+    .btn-disabled {
+        background: #d3d3d3;
+        color: #fff;
+        padding: 0.5rem 1.2rem;
+        border-radius: 8px;
+        font-weight: 600;
+    }
+
+    .add-btn-wrapper {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 20px;
+    }
+
+    .btn-add {
+        background-color: var(--brand);
+        color: #fff;
+        padding: 0.5rem 1.2rem;
+        border-radius: 10px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.2s ease;
+    }
+
+        .btn-add:hover {
+            background-color: var(--accent);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+</style>
+
+<div class="table-wrapper">
+    <div class="table-container">
+        <div class="avatar">
+            <i class="fa-solid fa-users"></i>
+        </div>
+
+        <h2>Users</h2>
+
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        @if ((bool)ViewData["ActiveUser"])
+                        {
+                            <th>Group</th>
+                        }
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model)
+                    {
+                        <tr>
+                            <td>@user.UserInfo.FirstName</td>
+                            <td>@user.UserInfo.LastName</td>
+                            <td>@user.UserInfo.Email</td>
+                            @if ((bool)ViewData["ActiveUser"])
+                            {
+                                @if (!user.UserInfo.IsSystemDefined)
+                                {
+                                    <td>
+                                        <form method="post" asp-action="UserGroupPage" asp-controller="User">
+                                            <input type="hidden" name="userId" value="@user.UserInfo.id" />
+                                            <button type="submit" class="btn-add">Manage User Group</button>
+                                        </form>
+                                    </td>
+
+                                    <td>
+                                        <div class="d-flex justify-content-center gap-1 flex-wrap">
+                                            <form method="post" asp-action="EditUserPage" asp-controller="User">
+                                                <input type="hidden" name="id" value="@user.UserInfo.id" />
+                                                <input type="hidden" name="FirstName" value="@user.UserInfo.FirstName" />
+                                                <input type="hidden" name="LastName" value="@user.UserInfo.LastName" />
+                                                <input type="hidden" name="Email" value="@user.UserInfo.Email" />
+                                                <input type="hidden" name="Password" value="@user.UserInfo.Password" />
+                                                <input type="hidden" name="ConfirmPassword" value="@user.UserInfo.ConfirmPassword" />
+                                                <button type="submit" class="btn-action btn-edit">Edit</button>
+
+                                               
+                                            </form>
+
+
+                                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal-@user.UserInfo.id">
+                                                Deactive
+                                            </button>
+                                        </div>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td><button class="btn-disabled">Manage User Group</button></td>
+                                    <td>
+                                        <div class="d-flex justify-content-center gap-1 flex-wrap">
+                                            <button class="btn-actiondisabled">Edit</button>
+                                            <button class="btn-actiondisabled">Deactive</button>
+                                        </div>
+                                    </td>
+                                }
+                            }
+                            else
+                            {
+                                <td>
+                                    <button type="button" class="btn btn-add btn-sm" data-bs-toggle="modal" data-bs-target="#activateModal-@user.UserInfo.id">
+                                        Activate
+                                    </button>
+                                </td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="add-btn-wrapper">
+            <a class="btn-add" asp-controller="User" asp-action="SignUpPage">
+                <i class="fa-solid fa-plus"></i> Add User
+            </a>
+        </div>
+    </div>
+</div>
