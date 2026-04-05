@@ -23,6 +23,7 @@ The system is designed to manage warehouse items with a secure, role-based appro
 
 ---
 
+
 ## 🛠️ Technologies Used
 
 - ASP.NET Core MVC  
